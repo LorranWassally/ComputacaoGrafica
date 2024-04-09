@@ -1,13 +1,10 @@
-def Translacao(x1,y1,x2,y2):
-    if x1>=0:
-        transx=0-x1
-    elif x1<=0:
-        transx=0+x1
-    if y1>=0:
-        transy=0-y1
-    elif y1<=0:
-        transy=0+y1
+def Translacaopara0(x1,y1,x2,y2):
+    transx=0-x1
+    transy=0-y1
     return(x1+transx,x2+transx,y1+transy,y2+transy,transx,transy)
+
+def Translacao(x1,y1,x2,y2,transx,transy):
+    return(x1+transx,x2+transx,y1+transy,y2+transy)
 
 def TranslacaoReversa(x1,y1,x2,y2,transx,transy):
     return(x1+transx,x2+transy,y1+transy,y2+transy)
@@ -33,9 +30,12 @@ def Rotacao(x1,y1,x2,y2,rot):
     return (x1,x2,y1,y2)
 
 def transformacoes(x1,y1,x2,y2,escx,escy,rot,transx,transy):
-    x1,x2,y1,y2,transxt,transyt = Translacao(x1,y1,x2,y2)
+    x1,x2,y1,y2,transxt,transyt = Translacaopara0(x1,y1,x2,y2)
     x1,x2,y1,y2 = Escala(x1,y1,x2,y2,escx,escy)
     x1,x2,y1,y2 = Rotacao(x1,y1,x2,y2,rot)
     x1,x2,y1,y2 = TranslacaoReversa(x1,y1,x2,y2,transxt,transyt)
+    x1,x2,y1,y2 = Translacao(x1,y1,x2,y2,transx,transy)
 
     return (x1,y1,x2,y2)
+
+print(transformacoes(-3,1,4,3,1.5,0.5,45,3,2))

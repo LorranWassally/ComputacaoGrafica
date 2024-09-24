@@ -1,0 +1,269 @@
+//Importando controle de orbitas
+
+//Server para controlar a camera (posição)
+
+import {OrbitControls} from "https://threejsfundamentals.org/threejs/resources/threejs/r110/examples/jsm/controls/OrbitControls.js";
+
+//Configurações básicas
+
+var scene = new THREE.Scene();
+
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth/ window.innerHeight, 0.1, 1000);
+
+ 
+
+var renderer = new THREE.WebGLRenderer();
+
+ 
+
+document.body.appendChild(renderer.domElement);
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+//
+
+const controlador = new OrbitControls(camera, renderer.domElement);
+
+ 
+
+ 
+
+//Objetos
+
+//objeto1
+
+function criarCuboPadrao(){
+
+  const pA = new THREE.Vector3( -36, 48, -3 );
+
+  const pB = new THREE.Vector3( 127, 136, -3 );
+
+  const pC = new THREE.Vector3( 127, 62, -3 );
+
+  const pD = new THREE.Vector3( 74, 48, -3 );
+
+  const pE = new THREE.Vector3( 127, 26, -3 );  
+
+  const pF = new THREE.Vector3( 127, -43, -3 );
+
+    
+
+  const pontos = [];
+
+   //Face frente
+
+  pontos.push(pA);//A
+
+  pontos.push(pB);//B
+
+  pontos.push(pC);//C
+
+  pontos.push(pD);//D
+  
+  pontos.push(pE);//D
+  
+  pontos.push(pF);//D
+
+  pontos.push(pA);//A
+
+  
+
+ var geometryA = new THREE.BufferGeometry().setFromPoints(pontos);
+
+ 
+
+ var materialA = new THREE.LineBasicMaterial({color:'red'});
+
+ 
+
+ var lineA = new THREE.Line(geometryA, materialA);
+
+  lineA.scale.set(1,1,1);
+
+  lineA.position.set(-10,0,0);
+
+  scene.add(lineA);
+
+}
+
+ 
+
+//Projeção Perspectiva 
+
+function criarCuboPadraoB(){
+
+  const pbA = new THREE.Vector3( 0, 67, -1 );
+
+  const pbB = new THREE.Vector3( 60, 100, -1 );
+
+  const pbC = new THREE.Vector3( 100, 100, -1 );
+
+  const pbD = new THREE.Vector3( 100, 54, -1 );
+
+  const pbE = new THREE.Vector3( 74, 48, -1 );  
+
+  const pbF = new THREE.Vector3( 100, 37, -1 );
+
+  const pbG = new THREE.Vector3( 100, 0, -1 );
+
+  const pbH = new THREE.Vector3( 49, 0, -1 );
+  
+  const pbI = new THREE.Vector3( 0, 27, -1 );
+
+  
+
+  const pontosB = [];
+
+  
+
+   //Face frente
+
+  pontosB.push(pbA); //A
+
+  pontosB.push(pbB); //B
+
+  pontosB.push(pbC); //C
+
+  pontosB.push(pbD); //D
+  
+  pontosB.push(pbE); //E
+
+  pontosB.push(pbF); //F
+  
+  pontosB.push(pbG); //G
+  
+  pontosB.push(pbH); //H
+  
+  pontosB.push(pbI); //I
+  
+  pontosB.push(pbA); //A
+
+  
+
+  //Criar geometria, esqueleto
+
+   var geometryB = new THREE.BufferGeometry().setFromPoints(pontosB);
+
+  
+
+  //Material - cor da linha
+
+  var materialB = new THREE.LineBasicMaterial({color:'yellow'});
+
+  
+
+  //Malha
+
+  var lineB = new THREE.Line(geometryB, materialB);
+
+  
+
+  lineB.scale.set(1,1,1);
+
+  lineB.position.set(0,0,0);
+
+    
+
+  scene.add(lineB);
+
+  
+
+}
+
+
+function criarCuboPadraoC(){
+
+  const pcA = new THREE.Vector3( 0, 0, -2 );
+
+  const pcB = new THREE.Vector3( 0, 100, -2 );
+
+  const pcC = new THREE.Vector3( 100, 100, -2 );
+
+  const pcD = new THREE.Vector3( 100, 0, -2 );
+
+  
+
+  const pontosC = [];
+
+  
+
+   //Face frente
+
+  pontosC.push(pcA); //A
+
+  pontosC.push(pcB); //B
+
+  pontosC.push(pcC); //C
+
+  pontosC.push(pcD); //D
+  
+  pontosC.push(pcA); //A
+  
+
+  
+
+  //Criar geometria, esqueleto
+
+   var geometryC = new THREE.BufferGeometry().setFromPoints(pontosC);
+
+  
+
+  //Material - cor da linha
+
+  var materialC = new THREE.LineBasicMaterial({color:'purple'});
+
+  
+
+  //Malha
+
+  var lineC = new THREE.Line(geometryC, materialC);
+
+  
+
+  lineC.scale.set(1,1,1);
+
+  lineC.position.set(0,0,0);
+
+    
+
+  scene.add(lineC);
+  
+}
+
+ 
+
+ 
+
+ 
+
+//Chamar as funções do cubo
+
+//criarCuboPadrao();
+
+criarCuboPadrao();
+
+criarCuboPadraoB();
+
+criarCuboPadraoC();
+
+ 
+
+ 
+
+camera.position.z = 5;
+
+ 
+
+//Mover, animar a cena, posição da camera
+
+function animate(){
+
+  requestAnimationFrame(animate);
+
+  renderer.render(scene,camera);  
+
+}
+
+ 
+
+animate();
